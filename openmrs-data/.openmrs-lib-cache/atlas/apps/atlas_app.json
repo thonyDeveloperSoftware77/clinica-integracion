@@ -1,0 +1,19 @@
+[
+    {
+        "id": "atlas",
+        "description": "atlas.description",
+        "order": 10,
+        "extensions": [
+            {
+                "id": "atlasHomepageLink",
+                "extensionPointId": "systemAdministration.apps",
+                "type": "link",
+                "order": 10,
+                "label": "atlas.appLink",
+                "url": "atlas/map.page",
+                "icon": "icon-globe",
+                "requiredPrivilege": "App: atlas.manage"
+            }
+        ]
+    }
+]

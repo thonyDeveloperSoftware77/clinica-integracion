@@ -1,0 +1,200 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+  - name: keycloak-service
+    url: http://keycloak:8082
+    tags:
+      - auth
+
+  - name: openmrs-service
+    url: http://openmrs:8080
+    tags:
+      - medical
+
+  - name: odoo-service
+    url: http://odoo:8069
+    tags:
+      - erp
+
+  - name: nextcloud-service
+    url: http://nextcloud:80
+    tags:
+      - storage
+
+  - name: integration-service
+    url: http://integration-service:3000
+    tags:
+      - integration
+
+routes:
+  - name: keycloak-route
+    service: keycloak-service
+    hosts:
+      - localhost
+    paths:
+      - /auth
+      - /keycloak
+
+  - name: keycloak-realms-route
+    service: keycloak-service
+    hosts:
+      - localhost
+    paths:
+      - /realms
+    strip_path: false
+
+  - name: openmrs-route
+    service: openmrs-service
+    hosts:
+      - localhost
+    paths:
+      - /openmrs
+    strip_path: false
+
+  - name: openmrs-login-route
+    service: openmrs-service
+    hosts:
+      - localhost
+    paths:
+      - /openmrs/login.htm
+    strip_path: false
+
+  - name: openmrs-oauth2-authorize
+    service: openmrs-service
+    hosts:
+      - localhost
+    paths:
+      - /openmrs/oauth2/authorize
+    strip_path: false
+
+  - name: openmrs-oauth2-callback
+    service: openmrs-service
+    hosts:
+      - localhost
+    paths:
+      - /openmrs/oauth2/callback
+    strip_path: false
+
+  - name: openmrs-api-route
+    service: openmrs-service
+    hosts:
+      - localhost
+    paths:
+      - /api/omrs
+    strip_path: true
+
+  - name: odoo-route
+    service: odoo-service
+    hosts:
+      - localhost
+    paths:
+      - /odoo
+    strip_path: true
+
+  - name: odoo-api-route
+    service: odoo-service
+    hosts:
+      - localhost
+    paths:
+      - /api/odoo
+    strip_path: true
+
+  - name: nextcloud-route
+    service: nextcloud-service
+    hosts:
+      - localhost
+    paths:
+      - /nextcloud
+    strip_path: false
+
+  - name: nextcloud-api-route
+    service: nextcloud-service
+    hosts:
+      - localhost
+    paths:
+      - /api/files
+    strip_path: true
+
+  - name: integration-api-route
+    service: integration-service
+    hosts:
+      - localhost
+    paths:
+      - /api/integration
+    strip_path: true
+
+plugins:
+  - name: cors
+    config:
+      origins:
+        - "*"
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+        - OPTIONS
+      headers:
+        - Accept
+        - Content-Type
+        - Authorization
+      exposed_headers:
+        - X-Auth-Token
+      credentials: true
+      max_age: 3600
+
+  - name: rate-limiting
+    route: openmrs-api-route
+    config:
+      minute: 100
+      hour: 1000
+
+  - name: rate-limiting
+    route: odoo-api-route
+    config:
+      minute: 100
+      hour: 1000
+
+  - name: jwt
+    route: openmrs-api-route
+    config:
+      uri_param_names:
+        - jwt
+      header_names:
+        - authorization
+      claims_to_verify:
+        - exp
+
+  - name: jwt
+    route: odoo-api-route
+    config:
+      uri_param_names:
+        - jwt
+      header_names:
+        - authorization
+      claims_to_verify:
+        - exp
+
+# (Todos los bloques `pre-function` han sido eliminados para dejar que OpenMRS maneje el flujo OAuth2
+#  directamente a través de sus endpoints /openmrs/oauth2/authorize y /openmrs/oauth2/callback.)
+
+consumers:
+  - username: integration-service
+    custom_id: integration-service-id
+    keyauth_credentials:
+      - key: integration-service-key
+    jwt_secrets:
+      - key: http://keycloak:8082/realms/clinica/integration-service
+        secret: your-keycloak-shared-secret-integration
+        algorithm: HS256
+
+  - username: frontend-app
+    custom_id: frontend-app-id
+    keyauth_credentials:
+      - key: frontend-app-key
+    jwt_secrets:
+      - key: http://keycloak:8082/realms/clinica/frontend-app
+        secret: your-keycloak-shared-secret-frontend
+        algorithm: HS256

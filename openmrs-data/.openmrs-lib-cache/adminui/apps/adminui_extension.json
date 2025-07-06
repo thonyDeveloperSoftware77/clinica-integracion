@@ -1,0 +1,28 @@
+[
+    {
+        "id": "org.openmrs.module.adminui.myAccount.menuItem",
+        "extensionPointId": "org.openmrs.module.appui.header.userAccount.menuItems",
+        "type": "link",
+        "label": "adminui.app.myAccount.label",
+        "url": "adminui/myaccount/myAccount.page"
+    },
+    {
+        "id": "org.openmrs.module.adminui.accounts",
+        "extensionPointId": "systemAdministration.apps",
+        "type": "link",
+        "label": "adminui.manageAccounts.label",
+        "requiredPrivilege": "Add Users",
+        "url": "adminui/systemadmin/accounts/manageAccounts.page",
+        "icon": "icon-group",
+        "order": 20
+    },
+    {
+        "id": "org.openmrs.module.adminui.globalProperties",
+        "extensionPointId": "systemAdministration.apps",
+        "type": "link",
+        "label": "adminui.manageGlobalProperties.label",
+        "url": "adminui/systemadmin/globalproperties/manageGlobalProperties.page",
+        "icon": "icon-cog",
+        "order": 19
+    }
+]

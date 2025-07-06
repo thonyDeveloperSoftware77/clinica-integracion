@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+    <bean id="IdentifierSourceDAO" class="org.openmrs.module.idgen.service.db.HibernateIdentifierSourceDAO">
+        <property name="sessionFactory"><ref bean="dbSessionFactory"/></property>
+    </bean>
+
+	<bean id="baseIdentifierSourceService" class="org.openmrs.module.idgen.service.BaseIdentifierSourceService">
+		<property name="dao">
+			<ref bean="IdentifierSourceDAO" />
+		</property>
+		<property name="processors">
+			<map>
+				<entry>
+					<key><value>org.openmrs.module.idgen.SequentialIdentifierGenerator</value></key>
+					<bean class="org.openmrs.module.idgen.processor.SequentialIdentifierGeneratorProcessor">
+                        <property name="identifierSourceService">
+                            <ref bean="baseIdentifierSourceService" />
+                        </property>
+                    </bean>
+				</entry>
+				<entry>
+					<key><value>org.openmrs.module.idgen.RemoteIdentifierSource</value></key>
+					<bean class="org.openmrs.module.idgen.processor.RemoteIdentifierSourceProcessor"/>
+				</entry>
+				<entry>
+					<key><value>org.openmrs.module.idgen.IdentifierPool</value></key>
+					<bean class="org.openmrs.module.idgen.processor.IdentifierPoolProcessor"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+		
+	<!--  Configure the Service -->
+   	<bean parent="serviceContext" id="identifierSourceService">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.idgen.service.IdentifierSourceService</value>
+				<bean class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+					<property name="transactionManager"><ref bean="transactionManager"/></property>
+					<property name="target">
+						<ref bean="baseIdentifierSourceService"/>
+					</property>
+					<property name="preInterceptors">
+						<list>
+							<ref bean="authorizationInterceptor"/>
+						</list>
+					</property>
+					<property name="transactionAttributeSource">
+						<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean parent="patientServiceTarget">
+		<property name="identifierValidators">
+			<map>
+				<entry>
+					<key><value>org.openmrs.module.idgen.validator.LuhnMod10IdentifierValidator</value></key>
+					<bean class="org.openmrs.module.idgen.validator.LuhnMod10IdentifierValidator"/>
+				</entry>
+				<entry>
+					<key><value>org.openmrs.module.idgen.validator.LuhnMod25IdentifierValidator</value></key>
+					<bean class="org.openmrs.module.idgen.validator.LuhnMod25IdentifierValidator"/>
+				</entry>
+				<entry>
+					<key><value>org.openmrs.module.idgen.validator.LuhnMod30IdentifierValidator</value></key>
+					<bean class="org.openmrs.module.idgen.validator.LuhnMod30IdentifierValidator"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+    <bean id="idgenTimerFactory" class="org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean">
+        <property name="scheduledExecutorTasks">
+            <list>
+                <bean id="refillIdentifierPools" class="org.springframework.scheduling.concurrent.ScheduledExecutorTask">
+                    <property name="delay" value="10000" /> <!-- delay 10 seconds -->
+                    <property name="period" value="300000" /> <!-- run every 5 minutes -->
+                    <property name="runnable">
+                        <bean class="org.openmrs.module.idgen.task.RefillIdentifierPoolsTask"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+	<!-- Add global property listeners -->
+	<bean id="idgen.globalPropertyListeners" parent="openmrsEventListeners">
+	    <property name="globalPropertyListeners">
+	        <list value-type="org.openmrs.api.GlobalPropertyListener" merge="true">
+	            <bean class="org.openmrs.module.idgen.prefixprovider.LocationBasedPrefixProvider" />
+	        </list>
+	    </property>
+	</bean>
+	
+</beans>

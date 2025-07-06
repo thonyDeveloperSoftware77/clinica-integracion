@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+    
+    <changeSet id="metadatasharing_create_table_exported_package" author="Dmytro Trifonov">
+    	<validCheckSum>3:cd6f473e1eef04494f47fbaaff70a52f</validCheckSum>
+		<preConditions onFail="MARK_RAN">
+    		<not><tableExists tableName="metadatasharing_exported_package"/></not>
+    	</preConditions>
+        <comment>Create table metadatasharing_exported_package</comment>
+
+        <createTable tableName="metadatasharing_exported_package">
+
+            <column name="exported_package_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"></constraints>
+            </column>
+
+            <column name="group_uuid" type="char(38)">
+                <constraints nullable="false"></constraints>
+            </column>
+
+            <column name="version" type="int">
+                <constraints nullable="false"></constraints>
+            </column>
+
+            <column name="published" type="boolean">
+                <constraints nullable="false"></constraints>
+            </column>
+
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"></constraints>
+            </column>
+
+            <column name="name" type="varchar(64)">
+                <constraints nullable="false"></constraints>
+            </column>
+
+            <column name="description" type="varchar(256)">
+                <constraints nullable="false"></constraints>
+            </column>
+
+            <column name="content" type="longblob"></column>
+
+        </createTable>
+        
+        <createIndex tableName="metadatasharing_exported_package" indexName="metadatasharing_package_group_uuid">
+            <column name="group_uuid"></column>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="metadatasharing_create_table_imported_package" author="Dmytro Trifonov">
+    	<validCheckSum>3:582520a49887eb6fd3e36592693e0730</validCheckSum>
+		<preConditions onFail="MARK_RAN">
+    		<not><tableExists tableName="metadatasharing_imported_package"/></not>
+    	</preConditions>
+        <comment>Create table metadatasharing_imported_package</comment>
+
+        <createTable tableName="metadatasharing_imported_package">
+
+            <column name="imported_package_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false" unique="true"></constraints>
+            </column>
+
+            <column name="group_uuid" type="char(38)">
+                <constraints nullable="false"></constraints>
+            </column>
+
+            <column name="subscription_url" type="varchar(512)" defaultValue="null"></column>
+
+            <column name="subscription_status" type="tinyint" defaultValue="0"></column>
+
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"></constraints>
+            </column>
+
+            <column name="date_imported" type="datetime" defaultValue="null"></column>
+
+            <column name="name" type="varchar(64)" defaultValue="null"></column>
+
+            <column name="description" type="varchar(256)">
+                <constraints nullable="false"></constraints>
+            </column>
+
+            <column name="import_config" type="varchar(1024)" defaultValue="null"></column>
+
+            <column name="remote_version" type="int" defaultValue="null"></column>
+
+            <column name="version" type="int" defaultValue="null"></column>
+
+        </createTable>
+
+        <createIndex tableName="metadatasharing_imported_package" indexName="metadatasharing_package_uuid">
+            <column name="group_uuid"></column>
+        </createIndex>
+
+    </changeSet>
+
+    <changeSet id="metadatasharing_create_table_imported_item" author="Dmytro Trifonov">
+    	<validCheckSum>3:412a3292ac3cc3f3d27fd8334df634c3</validCheckSum>
+    	<preConditions onFail="MARK_RAN">
+    		<not><tableExists tableName="metadatasharing_imported_item"/></not>
+    	</preConditions>
+        <comment>Create table metadatasharing_imported_item</comment>
+
+        <createTable tableName="metadatasharing_imported_item">
+
+            <column name="imported_item_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"></constraints>
+            </column>
+
+            <column name="uuid" type="char(38)">
+                <constraints nullable="false"></constraints>
+            </column>
+
+            <column name="classname" type="varchar(256)">
+                <constraints nullable="false"></constraints>
+            </column>
+
+            <column name="existing_uuid" type="char(38)" defaultValue="null"></column>
+
+            <column name="date_imported" type="datetime" defaultValue="null"></column>
+
+            <column name="date_changed" type="datetime" defaultValue="null"></column>
+
+            <column name="import_type" type="tinyint" defaultValue="0"></column>
+
+            <column name="assessed" type="boolean">
+                <constraints nullable="false"></constraints>
+            </column>
+
+        </createTable>
+
+        <createIndex tableName="metadatasharing_imported_item" indexName="metadatasharing_item_uuid">
+            <column name="uuid"></column>
+            <column name="existing_uuid"></column>
+        </createIndex>
+
+    </changeSet>
+
+</databaseChangeLog>

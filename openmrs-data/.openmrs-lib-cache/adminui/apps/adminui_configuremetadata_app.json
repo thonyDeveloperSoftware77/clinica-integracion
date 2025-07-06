@@ -1,0 +1,27 @@
+[
+    {
+        "id": "org.openmrs.module.adminui.configuremetadata",
+        "extensionPoints": [
+            {
+                "id": "org.openmrs.module.adminui.adminGroups",
+                "description": "adminui.configuremetadata.adminGroups.description"
+            },
+            {
+                "id": "org.openmrs.module.adminui.adminLinks",
+                "description": "adminui.configuremetadata.adminLinks.description"
+            }
+        ],
+        "extensions": [
+            {
+                "id": "org.openmrs.module.adminui.configuremetadata.homepageLink",
+                "extensionPointId": "org.openmrs.referenceapplication.homepageLink",
+                "type": "link",
+                "label": "adminui.app.configureMetadata.label",
+                "url": "adminui/metadata/configureMetadata.page",
+                "icon": "icon-tasks",
+                "order": 90,
+                "requiredPrivilege": "App: adminui.configuremetadata"
+            }
+        ]
+    }
+]

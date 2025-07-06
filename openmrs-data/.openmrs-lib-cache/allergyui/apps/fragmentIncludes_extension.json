@@ -1,0 +1,10 @@
+[
+    {
+        "id": "org.openmrs.module.allergyui.patientDashboard.secondColumnFragments",
+        "extensionPointId": "patientDashboard.secondColumnFragments",
+        "extensionParams": {
+            "provider": "allergyui",
+            "fragment": "allergies"
+        }
+    }
+]

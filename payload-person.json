@@ -1,0 +1,9 @@
+{
+  "person": {
+    "names":[
+      { "givenName":"Ana", "familyName":"Gómez" }
+    ],
+    "gender":"F",
+    "birthdate":"1985-05-10"
+  }
+}

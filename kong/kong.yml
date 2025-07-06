@@ -1,0 +1,38 @@
+_format_version: "3.0"
+
+services:
+- name: openmrs
+  url: http://openmrs:8080               # punto de entrada al contenedor de OpenMRS
+  routes:
+  - name: openmrs-ui
+    paths:
+      - /openmrs                         # intercepta /openmrs y todo lo que empiece por ahí
+    strip_path: false                    # deja el path intacto al reenviar al upstream
+    path_handling: v1                    # usa el nuevo comportamiento de manejo de ruta (prefijo)
+    preserve_host: false
+
+- name: nextcloud-webdav
+  url: http://nextcloud/remote.php/dav/
+  routes:
+  - name: webdav
+    paths:
+      - /api/files
+
+plugins:
+# ─── JWT para la API (opcional) ───
+- name: jwt
+  service: openmrs
+  config:
+    uri_param_names: ["jwt"]
+    claims_to_verify: ["exp"]
+
+# ─── OIDC para proteger la UI completa ───
+- name: oidc
+  service: openmrs
+  config:
+    issuer: http://keycloak:8082/realms/clinic
+    client_id: openmrs
+    client_secret: ""                   # dejamos en blanco para cliente público
+    redirect_uri: http://localhost:8000/openmrs/openid-connect
+    scope: ["openid","profile"]
+    callback_path: /openmrs/openid-connect

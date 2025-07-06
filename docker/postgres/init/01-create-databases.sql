@@ -1,0 +1,3 @@
+CREATE DATABASE keycloak;
+CREATE DATABASE kong;
+CREATE DATABASE nextcloud;
