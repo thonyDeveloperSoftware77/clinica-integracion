@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Enhanced List View -->
+    <record id="incident_report_tree_view" model="ir.ui.view">
+        <field name="name">incident.report.tree</field>
+        <field name="model">incident.report</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="user_name"/>
+                <field name="user_email"/>
+                <field name="description"/>
+                <field name="zammad_ticket_number"/>
+                <field name="state"/>
+                <field name="create_date"/>
+                <field name="last_sync"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Enhanced Form View -->
+    <record id="incident_report_form_view" model="ir.ui.view">
+        <field name="name">incident.report.form</field>
+        <field name="model">incident.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_sync_responses" 
+                            type="object" 
+                            string="Sync Conversation" 
+                            class="btn-primary"
+                            invisible="not zammad_ticket_id"
+                            confirm="This will reload the conversation from Zammad. Continue?"/>
+                    <button name="action_send_response" 
+                            type="object" 
+                            string="Send Response" 
+                            class="btn-success"
+                            invisible="not can_respond or not new_response"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group>
+                            <field name="user_name" readonly="1"/>
+                            <field name="user_email" readonly="1"/>
+                            <field name="create_date" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="zammad_ticket_number" readonly="1"/>
+                            <field name="zammad_ticket_id" readonly="1"/>
+                            <field name="last_sync" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <field name="description" placeholder="Describe the incident..." nolabel="1"/>
+                    </group>
+                    
+                    <!-- Conversation History -->
+                    <notebook invisible="not zammad_ticket_id">
+                        <page string="Conversation">
+                            <field name="zammad_responses" readonly="1" widget="text" nolabel="1"/>
+                        </page>
+                    </notebook>
+                    
+                    <!-- Response Box -->
+                    <group invisible="not can_respond">
+                        <field name="new_response" placeholder="Type your response here..." nolabel="1"/>
+                        <field name="can_respond" invisible="1"/>
+                    </group>
+                    
+                    <div invisible="state != 'closed'" class="alert alert-warning">
+                        <strong>Note:</strong> This ticket is closed. You cannot add new responses.
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="incident_report_search_view" model="ir.ui.view">
+        <field name="name">incident.report.search</field>
+        <field name="model">incident.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="zammad_ticket_number"/>
+                <filter name="my_incidents" string="My Incidents" domain="[('user_email', '=', uid)]"/>
+                <separator/>
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="sent" string="Sent" domain="[('state', '=', 'sent')]"/>
+                <filter name="in_progress" string="In Progress" domain="[('state', '=', 'in_progress')]"/>
+                <filter name="closed" string="Closed" domain="[('state', '=', 'closed')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_state" string="Status" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter name="group_by_date" string="Date" domain="[]" context="{'group_by': 'create_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="incident_report_action" model="ir.actions.act_window">
+        <field name="name">Incident Reports</field>
+        <field name="res_model">incident.report</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="incident_report_search_view"/>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="incident_report_menu" name="Incident Reports" action="incident_report_action" sequence="50"/>
+
+</odoo>

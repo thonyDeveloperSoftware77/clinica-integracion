@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Form view extension para res.partner -->
+    <record id="view_partner_form_dental" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit.dental.clinical.management</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            
+            <!-- Agregar campos de paciente -->
+            <xpath expr="//field[@name='function']" position="replace">
+                <field name="is_patient" string="Is Patient"/>
+                <field name="dob" string="Date of Birth"/>
+                <field name="patient_age" string="Age"/>
+                <field name="patient_no" string="Patient No." readonly="1"/>
+                <field name="gender" widget="radio"/>
+            </xpath>
+            
+      
+         
+
+            <!-- Ejemplo: Invisibilizar teléfono si deseas -->
+            <xpath expr="//field[@name='phone']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!--
+                *Eliminado* l10n_in_gst_treatment y l10n_in_pan porque son campos de localización India, no estándar.
+                Si tu base no tiene esos campos, nunca pongas xpaths con ellos.
+            -->
+            <xpath expr="//field[@name='website']" position="attributes">
+                <attribute name="invisible">company_type == 'person'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='title']" position="attributes">
+                <attribute name="invisible">company_type == 'person'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="attributes">
+                <attribute name="invisible">company_type == 'person'</attribute>
+            </xpath>
+            <!-- Quita o comenta todos los botones smart si no existen en tu Odoo! Si dan error, eliminarlos -->
+            <!-- Ejemplo de smartbutton de compras: descomenta solo si tienes el módulo purchase instalado y el smartbutton existe -->
+            <!--
+            <xpath expr="//button[@name='%(purchase.act_res_partner_2_purchase_order)d']" position="attributes">
+                <attribute name="invisible">company_type == 'person'</attribute>
+            </xpath>
+            -->
+        </field>
+    </record>
+
+    <!-- Window Action para lista de pacientes -->
+    <record id="dental_patient_menu" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">res.partner</field>
+        <field name="domain">[('is_patient','=',True)]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Window Action para facturas -->
+    <record id="action_patient_invoices" model="ir.actions.act_window">
+        <field name="name">Invoices</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('move_type', '=', 'out_invoice')]</field>
+    </record>
+
+    <!-- Menú principal -->
+    <menuitem id="hospital_root_menu" name="Clínica Dental" sequence="1"/>
+    <menuitem id="hospital_patient_info" name="Pacientes" parent="hospital_root_menu" action="dental_patient_menu" sequence="3"/>
+    <menuitem id="hospital_invoice_info" name="Facturas" parent="hospital_root_menu" action="action_patient_invoices" sequence="4"/>
+
+</odoo>

@@ -1,7 +1,4 @@
 FROM openmrs/openmrs-reference-application-distro:2.12.0
 
-# Copiamos solo tu módulo OAuth2 Login al directorio que escanea OpenMRS
-COPY openmrs-modules/openmrs-module-oauth2login-1.5.0.omod \
-     /usr/local/tomcat/.OpenMRS/modules/
 
-# (Opcional) Si necesitas persistir datos, monta openmrs-data en docker-compose
+COPY oauth2.properties /usr/local/tomcat/.OpenMRS/

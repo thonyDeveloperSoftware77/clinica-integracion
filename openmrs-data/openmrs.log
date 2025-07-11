@@ -1,107 +1,96 @@
-ERROR - ModuleFactory.loadModules(199) |2025-07-06T19:18:17,854| Unable to load file in module directory: /usr/local/tomcat/.OpenMRS/modules/custom. Skipping file.
-org.openmrs.module.ModuleException: Module file does not have the correct '.omod' file extension Module: custom
-	at org.openmrs.module.ModuleFileParser.validateFileHasModuleFileExtension(ModuleFileParser.java:123) ~[openmrs-api-2.4.0.jar:?]
-	at org.openmrs.module.ModuleFileParser.parse(ModuleFileParser.java:213) ~[openmrs-api-2.4.0.jar:?]
-	at org.openmrs.module.ModuleFactory.loadModule(ModuleFactory.java:107) ~[openmrs-api-2.4.0.jar:?]
-	at org.openmrs.module.ModuleFactory.loadModules(ModuleFactory.java:195) [openmrs-api-2.4.0.jar:?]
-	at org.openmrs.module.ModuleFactory.loadModules(ModuleFactory.java:174) [openmrs-api-2.4.0.jar:?]
-	at org.openmrs.module.ModuleUtil.startup(ModuleUtil.java:78) [openmrs-api-2.4.0.jar:?]
-	at org.openmrs.api.context.Context.startup(Context.java:895) [openmrs-api-2.4.0.jar:?]
-	at org.openmrs.web.Listener.startOpenmrs(Listener.java:238) [openmrs-web-2.4.0.jar:?]
-	at org.openmrs.web.WebDaemon$1.run(WebDaemon.java:42) [openmrs-web-2.4.0.jar:?]
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:18,431| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: event.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:18,459| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:18,461| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: event.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:18,463| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:18,499| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: legacyui.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:18,501| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:18,503| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: legacyui.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:18,506| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:18,913| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: fhir2.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:18,917| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:18,920| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: fhir2.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:18,923| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,044| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: oauth2login.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,047| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,053| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: oauth2login.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,059| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,078| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: spa.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,082| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,086| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: spa.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,088| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,152| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: dataexchange.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,154| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,156| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: dataexchange.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,158| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,178| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: reportingcompatibility.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,181| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,185| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: reportingcompatibility.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,188| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,296| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: webservices.rest.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,298| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,301| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: webservices.rest.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,306| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,393| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: serialization.xstream.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,395| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,398| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: serialization.xstream.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,400| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,500| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: uiframework.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,502| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,504| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: uiframework.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,506| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,605| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: uicommons.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,607| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,609| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: uicommons.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,612| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,688| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: atlas.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,696| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,699| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: atlas.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,702| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,787| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: uilibrary.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,788| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,790| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: uilibrary.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,792| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,911| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: providermanagement.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,914| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,916| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: providermanagement.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,919| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,975| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: htmlwidgets.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,978| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:19,980| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: htmlwidgets.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:19,981| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,057| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: addresshierarchy.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,060| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,063| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: addresshierarchy.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,066| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,102| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: owa.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,104| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,106| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: owa.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,108| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,209| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: openconceptlab.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,211| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,212| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: openconceptlab.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,214| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,337| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: metadatamapping.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,339| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,341| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: metadatamapping.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,343| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,424| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: metadatasharing.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,427| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,429| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: metadatasharing.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,432| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,505| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: metadatadeploy.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,507| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,509| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: metadatadeploy.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,511| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,665| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: htmlformentry.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,667| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,669| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: htmlformentry.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,671| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,747| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: calculation.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,749| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:20,751| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: calculation.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:20,753| Exiting method saveGlobalProperty
-WARN - ModuleFactory.startModuleInternal(788) |2025-07-06T19:18:21,219| Error while trying to start module: reporting
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,083| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: event.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,110| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,112| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: event.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,114| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,155| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: legacyui.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,157| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,159| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: legacyui.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,161| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,642| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: fhir2.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,645| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,647| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: fhir2.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,650| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,775| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: oauth2login.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,779| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,784| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: oauth2login.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,792| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,805| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: spa.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,809| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,818| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: spa.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,820| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,894| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: dataexchange.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,895| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,897| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: dataexchange.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,901| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,925| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: reportingcompatibility.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,927| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:49,930| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: reportingcompatibility.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:49,933| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,052| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: webservices.rest.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,054| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,057| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: webservices.rest.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,061| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,098| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: serialization.xstream.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,100| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,102| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: serialization.xstream.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,104| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,192| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: uiframework.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,193| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,195| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: uiframework.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,197| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,325| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: uicommons.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,327| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,329| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: uicommons.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,330| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,394| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: atlas.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,396| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,399| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: atlas.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,402| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,493| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: uilibrary.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,495| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,499| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: uilibrary.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,502| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,600| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: providermanagement.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,605| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,611| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: providermanagement.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,614| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,670| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: htmlwidgets.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,674| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,679| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: htmlwidgets.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,685| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,817| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: addresshierarchy.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,822| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,825| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: addresshierarchy.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,827| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,876| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: owa.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,878| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:50,880| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: owa.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:50,882| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:51,010| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: openconceptlab.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:51,012| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:51,014| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: openconceptlab.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:51,019| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:51,156| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: metadatamapping.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:51,159| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:51,162| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: metadatamapping.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:51,164| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:51,256| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: metadatasharing.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:51,259| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:51,261| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: metadatasharing.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:51,263| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:51,349| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: metadatadeploy.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:51,352| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:51,354| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: metadatadeploy.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:51,359| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:51,478| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: htmlformentry.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:51,484| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:51,487| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: htmlformentry.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:51,493| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:51,654| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: calculation.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:51,658| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:51,663| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: calculation.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:51,668| Exiting method saveGlobalProperty
+WARN - ModuleFactory.startModuleInternal(788) |2025-07-09T01:18:52,232| Error while trying to start module: reporting
 org.openmrs.module.ModuleException: Unable to update data model using liquibase.xml. Module: Reporting
 	at org.openmrs.module.ModuleFactory.runLiquibase(ModuleFactory.java:997) ~[openmrs-api-2.4.0.jar:?]
 	at org.openmrs.module.ModuleFactory.startModuleInternal(ModuleFactory.java:728) [openmrs-api-2.4.0.jar:?]
@@ -146,89 +135,89 @@ Caused by: java.sql.SQLSyntaxErrorException: Key column 'report_definition_uuid'
 	at org.openmrs.util.DatabaseUpdater.executeChangelog(DatabaseUpdater.java:232) ~[openmrs-api-2.4.0.jar:?]
 	at org.openmrs.module.ModuleFactory.runLiquibase(ModuleFactory.java:989) ~[openmrs-api-2.4.0.jar:?]
 	... 2 more
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,276| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,288| Exiting method saveAlert
-ERROR - ModuleFactory.startModules(257) |2025-07-06T19:18:21,303| Module EMR API Module cannot be started because it requires the following module(s): reporting ${reportingModuleVersion} Please install and start these modules first.
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,331| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,334| Exiting method saveAlert
-ERROR - ModuleFactory.startModules(257) |2025-07-06T19:18:21,342| Module Appointment Scheduling Module cannot be started because it requires the following module(s): reporting 0.9.2 Please install and start these modules first.
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,356| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,361| Exiting method saveAlert
-ERROR - ModuleFactory.startModules(257) |2025-07-06T19:18:21,367| Module Reporting REST cannot be started because it requires the following module(s): reporting 1.15.0 Please install and start these modules first.
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,376| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,379| Exiting method saveAlert
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,478| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: idgen.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,482| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,485| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: idgen.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,487| Exiting method saveGlobalProperty
-ERROR - ModuleFactory.startModules(257) |2025-07-06T19:18:21,505| Module Reference Metadata Module cannot be started because it requires the following module(s): emrapi ${emrapiModuleVersion},reporting 1.19.0 Please install and start these modules first.
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,516| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,518| Exiting method saveAlert
-ERROR - ModuleFactory.startModules(257) |2025-07-06T19:18:21,524| Module Reference Demo Data Module cannot be started because it requires the following module(s): referencemetadata 2.5.0},emrapi 1.18 Please install and start these modules first.
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,533| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,535| Exiting method saveAlert
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,661| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: registrationcore.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,662| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,664| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: registrationcore.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,666| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,771| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: appframework.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,773| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,777| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: appframework.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,779| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,849| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: formentryapp.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,851| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,852| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: formentryapp.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,854| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,926| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: allergyui.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,927| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,930| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: allergyui.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,931| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,991| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: appui.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,993| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:21,996| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: appui.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:21,998| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:22,062| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: adminui.started value: true, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:22,064| Exiting method saveGlobalProperty
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:22,066| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: adminui.mandatory value: false, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:22,067| Exiting method saveGlobalProperty
-ERROR - ModuleFactory.startModules(257) |2025-07-06T19:18:22,085| Module Attachments cannot be started because it requires the following module(s): emrapi 1.19 Please install and start these modules first.
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:22,097| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:22,100| Exiting method saveAlert
-ERROR - ModuleFactory.startModules(257) |2025-07-06T19:18:22,107| Module Core Apps Module cannot be started because it requires the following module(s): emrapi 1.32.0,reporting 0.10.4 Please install and start these modules first.
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:22,117| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:22,120| Exiting method saveAlert
-ERROR - ModuleFactory.startModules(257) |2025-07-06T19:18:22,127| Module Registration App Module cannot be started because it requires the following module(s): emrapi 1.18,coreapps 1.11.1,reporting 0.10.4 Please install and start these modules first.
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:22,136| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:22,138| Exiting method saveAlert
-ERROR - ModuleFactory.startModules(257) |2025-07-06T19:18:22,144| Module Reporting UI Module cannot be started because it requires the following module(s): reportingrest 1.4,reporting 0.9.3 Please install and start these modules first.
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:22,153| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:22,156| Exiting method saveAlert
-ERROR - ModuleFactory.startModules(257) |2025-07-06T19:18:22,162| Module Appointment Scheduling UI Module cannot be started because it requires the following module(s): appointmentscheduling ${appointmentSchedulingVersion},coreapps 1.11.1,emrapi,reporting Please install and start these modules first.
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:22,170| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:22,172| Exiting method saveAlert
-ERROR - ModuleFactory.startModules(257) |2025-07-06T19:18:22,177| Module HTML Form Entry UI Framework Integration Module cannot be started because it requires the following module(s): emrapi 1.18 Please install and start these modules first.
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:22,185| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:22,187| Exiting method saveAlert
-ERROR - ModuleFactory.startModules(257) |2025-07-06T19:18:22,191| Module Reference Application Module cannot be started because it requires the following module(s): htmlformentryui 1.6.1 Please install and start these modules first.
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:22,199| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:22,201| Exiting method saveAlert
-INFO - LoggingAdvice.invoke(117) |2025-07-06T19:18:22,775| In method SchedulerService.saveToMemento. Arguments: 
-INFO - LoggingAdvice.invoke(157) |2025-07-06T19:18:22,777| Exiting method saveToMemento
-INFO - EhCacheManagerFactoryBean.destroy(192) |2025-07-06T19:18:22,801| Shutting down EhCache CacheManager
-INFO - ServiceContext.startRefreshingContext(822) |2025-07-06T19:18:22,802| Refreshing Context
-INFO - Context.setAuthenticationScheme(194) |2025-07-06T19:18:40,709| An authentication scheme override was provided. Using this one in place of the OpenMRS default authentication scheme.
-INFO - ServiceContext.doneRefreshingContext(833) |2025-07-06T19:18:41,976| Done refreshing Context
-WARN - OpenmrsUtil.getRuntimePropertiesFilePathName(2138) |2025-07-06T19:18:51,861| Unable to find a runtime properties file at /usr/local/tomcat/openmrs-runtime.properties
-WARN - OpenmrsUtil.getRuntimePropertiesFilePathName(2138) |2025-07-06T19:18:51,936| Unable to find a runtime properties file at /usr/local/tomcat/openmrs-runtime.properties
-INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(69) |2025-07-06T19:18:51,941| identifying the Liquibase snapshot version that had been used to initialize the OpenMRS database...
-INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(82) |2025-07-06T19:18:51,941| looking for un-run change sets in snapshot version '2.3.x'
-INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(95) |2025-07-06T19:18:52,106| file 'org/openmrs/liquibase/snapshots/schema-only/liquibase-schema-only-2.3.x.xml' contains 0 un-run change sets
-INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(95) |2025-07-06T19:18:52,248| file 'org/openmrs/liquibase/snapshots/core-data/liquibase-core-data-2.3.x.xml' contains 0 un-run change sets
-INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(113) |2025-07-06T19:18:52,248| the Liquibase snapshot version that had been used to initialize the OpenMRS database is '2.3.x'
-INFO - ChangeLogDetective.getUnrunLiquibaseUpdateFileNames(149) |2025-07-06T19:18:52,292| file 'org/openmrs/liquibase/updates/liquibase-update-to-latest-2.4.x.xml}' contains 0 un-run change sets
-INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(69) |2025-07-06T19:18:52,293| identifying the Liquibase snapshot version that had been used to initialize the OpenMRS database...
-INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(82) |2025-07-06T19:18:52,293| looking for un-run change sets in snapshot version '2.3.x'
-INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(95) |2025-07-06T19:18:52,420| file 'org/openmrs/liquibase/snapshots/schema-only/liquibase-schema-only-2.3.x.xml' contains 0 un-run change sets
-INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(95) |2025-07-06T19:18:52,526| file 'org/openmrs/liquibase/snapshots/core-data/liquibase-core-data-2.3.x.xml' contains 0 un-run change sets
-INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(113) |2025-07-06T19:18:52,526| the Liquibase snapshot version that had been used to initialize the OpenMRS database is '2.3.x'
-INFO - ChangeLogDetective.getUnrunLiquibaseUpdateFileNames(149) |2025-07-06T19:18:52,560| file 'org/openmrs/liquibase/updates/liquibase-update-to-latest-2.4.x.xml}' contains 0 un-run change sets
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,332| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,353| Exiting method saveAlert
+ERROR - ModuleFactory.startModules(257) |2025-07-09T01:18:52,373| Module EMR API Module cannot be started because it requires the following module(s): reporting ${reportingModuleVersion} Please install and start these modules first.
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,417| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,419| Exiting method saveAlert
+ERROR - ModuleFactory.startModules(257) |2025-07-09T01:18:52,426| Module Appointment Scheduling Module cannot be started because it requires the following module(s): reporting 0.9.2 Please install and start these modules first.
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,439| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,446| Exiting method saveAlert
+ERROR - ModuleFactory.startModules(257) |2025-07-09T01:18:52,454| Module Reporting REST cannot be started because it requires the following module(s): reporting 1.15.0 Please install and start these modules first.
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,465| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,468| Exiting method saveAlert
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,555| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: idgen.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,557| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,559| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: idgen.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,561| Exiting method saveGlobalProperty
+ERROR - ModuleFactory.startModules(257) |2025-07-09T01:18:52,576| Module Reference Metadata Module cannot be started because it requires the following module(s): emrapi ${emrapiModuleVersion},reporting 1.19.0 Please install and start these modules first.
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,585| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,588| Exiting method saveAlert
+ERROR - ModuleFactory.startModules(257) |2025-07-09T01:18:52,594| Module Reference Demo Data Module cannot be started because it requires the following module(s): referencemetadata 2.5.0},emrapi 1.18 Please install and start these modules first.
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,604| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,607| Exiting method saveAlert
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,693| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: registrationcore.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,695| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,696| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: registrationcore.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,699| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,837| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: appframework.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,839| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,842| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: appframework.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,844| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,960| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: formentryapp.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,962| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:52,964| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: formentryapp.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:52,968| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,053| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: allergyui.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,057| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,062| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: allergyui.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,066| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,138| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: appui.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,141| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,144| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: appui.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,148| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,231| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: adminui.started value: true, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,233| Exiting method saveGlobalProperty
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,237| In method AdministrationService.saveGlobalProperty. Arguments: GlobalProperty=property: adminui.mandatory value: false, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,238| Exiting method saveGlobalProperty
+ERROR - ModuleFactory.startModules(257) |2025-07-09T01:18:53,260| Module Attachments cannot be started because it requires the following module(s): emrapi 1.19 Please install and start these modules first.
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,270| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,273| Exiting method saveAlert
+ERROR - ModuleFactory.startModules(257) |2025-07-09T01:18:53,278| Module Core Apps Module cannot be started because it requires the following module(s): emrapi 1.32.0,reporting 0.10.4 Please install and start these modules first.
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,290| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,293| Exiting method saveAlert
+ERROR - ModuleFactory.startModules(257) |2025-07-09T01:18:53,304| Module Registration App Module cannot be started because it requires the following module(s): emrapi 1.18,coreapps 1.11.1,reporting 0.10.4 Please install and start these modules first.
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,315| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,317| Exiting method saveAlert
+ERROR - ModuleFactory.startModules(257) |2025-07-09T01:18:53,323| Module Reporting UI Module cannot be started because it requires the following module(s): reportingrest 1.4,reporting 0.9.3 Please install and start these modules first.
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,333| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,336| Exiting method saveAlert
+ERROR - ModuleFactory.startModules(257) |2025-07-09T01:18:53,341| Module Appointment Scheduling UI Module cannot be started because it requires the following module(s): appointmentscheduling ${appointmentSchedulingVersion},coreapps 1.11.1,emrapi,reporting Please install and start these modules first.
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,350| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,352| Exiting method saveAlert
+ERROR - ModuleFactory.startModules(257) |2025-07-09T01:18:53,356| Module HTML Form Entry UI Framework Integration Module cannot be started because it requires the following module(s): emrapi 1.18 Please install and start these modules first.
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,364| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,367| Exiting method saveAlert
+ERROR - ModuleFactory.startModules(257) |2025-07-09T01:18:53,373| Module Reference Application Module cannot be started because it requires the following module(s): htmlformentryui 1.6.1 Please install and start these modules first.
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,381| In method AlertService.saveAlert. Arguments: Alert=Alert: #null, 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,383| Exiting method saveAlert
+INFO - LoggingAdvice.invoke(117) |2025-07-09T01:18:53,887| In method SchedulerService.saveToMemento. Arguments: 
+INFO - LoggingAdvice.invoke(157) |2025-07-09T01:18:53,891| Exiting method saveToMemento
+INFO - EhCacheManagerFactoryBean.destroy(192) |2025-07-09T01:18:53,950| Shutting down EhCache CacheManager
+INFO - ServiceContext.startRefreshingContext(822) |2025-07-09T01:18:53,951| Refreshing Context
+INFO - Context.setAuthenticationScheme(194) |2025-07-09T01:19:11,911| An authentication scheme override was provided. Using this one in place of the OpenMRS default authentication scheme.
+INFO - ServiceContext.doneRefreshingContext(833) |2025-07-09T01:19:12,824| Done refreshing Context
+WARN - OpenmrsUtil.getRuntimePropertiesFilePathName(2138) |2025-07-09T01:19:22,188| Unable to find a runtime properties file at /usr/local/tomcat/openmrs-runtime.properties
+WARN - OpenmrsUtil.getRuntimePropertiesFilePathName(2138) |2025-07-09T01:19:22,288| Unable to find a runtime properties file at /usr/local/tomcat/openmrs-runtime.properties
+INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(69) |2025-07-09T01:19:22,292| identifying the Liquibase snapshot version that had been used to initialize the OpenMRS database...
+INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(82) |2025-07-09T01:19:22,292| looking for un-run change sets in snapshot version '2.3.x'
+INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(95) |2025-07-09T01:19:22,563| file 'org/openmrs/liquibase/snapshots/schema-only/liquibase-schema-only-2.3.x.xml' contains 0 un-run change sets
+INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(95) |2025-07-09T01:19:22,697| file 'org/openmrs/liquibase/snapshots/core-data/liquibase-core-data-2.3.x.xml' contains 0 un-run change sets
+INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(113) |2025-07-09T01:19:22,698| the Liquibase snapshot version that had been used to initialize the OpenMRS database is '2.3.x'
+INFO - ChangeLogDetective.getUnrunLiquibaseUpdateFileNames(149) |2025-07-09T01:19:22,747| file 'org/openmrs/liquibase/updates/liquibase-update-to-latest-2.4.x.xml}' contains 0 un-run change sets
+INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(69) |2025-07-09T01:19:22,747| identifying the Liquibase snapshot version that had been used to initialize the OpenMRS database...
+INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(82) |2025-07-09T01:19:22,748| looking for un-run change sets in snapshot version '2.3.x'
+INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(95) |2025-07-09T01:19:22,953| file 'org/openmrs/liquibase/snapshots/schema-only/liquibase-schema-only-2.3.x.xml' contains 0 un-run change sets
+INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(95) |2025-07-09T01:19:23,101| file 'org/openmrs/liquibase/snapshots/core-data/liquibase-core-data-2.3.x.xml' contains 0 un-run change sets
+INFO - ChangeLogDetective.getInitialLiquibaseSnapshotVersion(113) |2025-07-09T01:19:23,102| the Liquibase snapshot version that had been used to initialize the OpenMRS database is '2.3.x'
+INFO - ChangeLogDetective.getUnrunLiquibaseUpdateFileNames(149) |2025-07-09T01:19:23,144| file 'org/openmrs/liquibase/updates/liquibase-update-to-latest-2.4.x.xml}' contains 0 un-run change sets

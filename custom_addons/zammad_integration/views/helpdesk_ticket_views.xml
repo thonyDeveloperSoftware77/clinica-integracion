@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Extend Helpdesk Ticket Form View -->
+        <record id="view_helpdesk_ticket_form_inherit" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.form.inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="create_zammad_ticket" string="Create Zammad Ticket" type="object" 
+                            class="oe_highlight" attrs="{'invisible': [('zammad_ticket_id', '!=', False)]}"/>
+                    <button name="open_zammad_ticket" string="Open Zammad Ticket" type="object" 
+                            class="btn-primary" attrs="{'invisible': [('zammad_ticket_id', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <group string="Zammad Integration" attrs="{'invisible': [('zammad_ticket_id', '=', False)]}">
+                        <field name="zammad_ticket_id" readonly="1"/>
+                        <field name="zammad_ticket_number" readonly="1"/>
+                        <field name="zammad_url" readonly="1" widget="url"/>
+                        <field name="sync_to_zammad" readonly="1"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Extend Helpdesk Ticket Tree View -->
+        <record id="view_helpdesk_ticket_tree_inherit" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.tree.inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <field name="zammad_ticket_number" optional="hide"/>
+                    <field name="sync_to_zammad" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

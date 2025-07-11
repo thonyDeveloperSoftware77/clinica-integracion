@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Zammad Configuration Parameters -->
+        <record id="zammad_url_param" model="ir.config_parameter">
+            <field name="key">incident_report.zammad_url</field>
+            <field name="value">http://localhost:8080</field>
+        </record>
+
+        <!-- Optional: Zammad token for fallback (if not using Clerk) -->
+        <record id="zammad_token_param" model="ir.config_parameter">
+            <field name="key">incident_report.zammad_token</field>
+            <field name="value"></field>
+        </record>
+    </data>
+</odoo>

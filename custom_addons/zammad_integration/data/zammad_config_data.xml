@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Default Zammad Configuration -->
+        <record id="default_zammad_config" model="zammad.config">
+            <field name="name">Default Zammad Server</field>
+            <field name="url">http://localhost:8080</field>
+            <field name="token">YOUR_API_TOKEN_HERE</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo>

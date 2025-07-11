@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Zammad Configuration Form View -->
+        <record id="view_zammad_config_form" model="ir.ui.view">
+            <field name="name">zammad.config.form</field>
+            <field name="model">zammad.config</field>
+            <field name="arch" type="xml">
+                <form string="Configuración Zammad">
+                    <header>
+                        <button name="test_connection" string="Probar Conexión" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="test_connection" type="object" class="oe_stat_button" icon="fa-plug">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_text">Probar</span>
+                                    <span class="o_stat_text">Conexión</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Nombre de Configuración"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="url" placeholder="http://localhost:8080"/>
+                                <field name="token" password="True"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Zammad Configuration Tree View -->
+        <record id="view_zammad_config_tree" model="ir.ui.view">
+            <field name="name">zammad.config.tree</field>
+            <field name="model">zammad.config</field>
+            <field name="arch" type="xml">
+                <list string="Zammad Configurations">
+                    <field name="name"/>
+                    <field name="url"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Zammad Configuration Action -->
+        <record id="action_zammad_config" model="ir.actions.act_window">
+            <field name="name">Configuración Zammad</field>
+            <field name="res_model">zammad.config</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Configure your Zammad integration settings
+                </p>
+                <p>
+                    Set up the connection to your Zammad instance to enable ticket synchronization.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Items -->
+        <menuitem id="menu_zammad_integration" name="Integración Zammad" parent="base.menu_administration"/>
+        <menuitem id="menu_zammad_config" name="Configuración" parent="menu_zammad_integration" action="action_zammad_config"/>
+    </data>
+</odoo>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Simple Portal incident list page -->
+    <template id="portal_my_incidents" name="My Incidents">
+        <t t-call="portal.portal_layout">
+            <t t-set="title">Incidents</t>
+            <div class="container">
+                <h1>My Incident Reports</h1>
+                
+                <t t-if="not incidents">
+                    <div class="alert alert-warning mt-3" role="alert">
+                        <strong>No incidents found.</strong><br/>
+                        <a href="/web#action=dental_hospital.patient_incident_report_action&amp;model=incident.report&amp;view_type=form" class="btn btn-primary mt-2">
+                            <i class="fa fa-plus"/> Report New Incident
+                        </a>
+                    </div>
+                </t>
+                
+                <t t-if="incidents">
+                    <div class="mb-3">
+                        <a href="/web#action=dental_hospital.patient_incident_report_action&amp;model=incident.report&amp;view_type=form" class="btn btn-primary">
+                            <i class="fa fa-plus"/> Report New Incident
+                        </a>
+                    </div>
+                    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Zammad Ticket</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="incidents" t-as="incident">
+                                <tr>
+                                    <td><t t-esc="incident.id"/></td>
+                                    <td><t t-esc="incident.title"/></td>
+                                    <td><t t-esc="incident.category"/></td>
+                                    <td>
+                                        <span t-if="incident.priority == '1'" class="badge badge-info">Low</span>
+                                        <span t-if="incident.priority == '2'" class="badge badge-secondary">Normal</span>
+                                        <span t-if="incident.priority == '3'" class="badge badge-warning">High</span>
+                                        <span t-if="incident.priority == '4'" class="badge badge-danger">Urgent</span>
+                                    </td>
+                                    <td>
+                                        <span t-if="incident.state == 'draft'" class="badge badge-secondary">Draft</span>
+                                        <span t-if="incident.state == 'submitted'" class="badge badge-info">Submitted</span>
+                                        <span t-if="incident.state == 'in_progress'" class="badge badge-warning">In Progress</span>
+                                        <span t-if="incident.state == 'resolved'" class="badge badge-success">Resolved</span>
+                                        <span t-if="incident.state == 'cancelled'" class="badge badge-dark">Cancelled</span>
+                                    </td>
+                                    <td><t t-esc="incident.create_date" t-options="{'widget': 'date'}"/></td>
+                                    <td>
+                                        <span t-if="incident.zammad_ticket_number" class="badge badge-primary">
+                                            #<t t-esc="incident.zammad_ticket_number"/>
+                                        </span>
+                                        <span t-if="not incident.zammad_ticket_number" class="text-muted">-</span>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

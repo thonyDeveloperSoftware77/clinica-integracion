@@ -1,0 +1,147 @@
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: clinica_user
+      POSTGRES_PASSWORD: clinica_password
+      POSTGRES_DB: clinica_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clinica_user -d clinica_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - clinica_network
+
+  odoo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - HOST=postgres
+      - USER=clinica_user
+      - PASSWORD=clinica_password
+      - DB_NAME=clinica_db
+      - DB_FILTER=clinica_db
+      - DB_TEMPLATE=template0
+    command: ["odoo", "-i", "base,auth_oidc", "-d", "clinica_db", "--without-demo=all", "--dev=all"]
+    
+    
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo_data:/var/lib/odoo
+      - ./custom_addons:/mnt/extra-addons
+    networks:
+      - clinica_network
+    restart: unless-stopped
+  
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:22.0
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin_password
+    command: start-dev
+    ports:
+      - "8081:8080"
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+    networks:
+      - clinica_network
+    restart: unless-stopped
+
+  nextcloud:
+    image: nextcloud:latest
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=clinica_db
+      - POSTGRES_USER=clinica_user
+      - POSTGRES_PASSWORD=clinica_password
+      - NEXTCLOUD_ADMIN_USER=admin
+      - NEXTCLOUD_ADMIN_PASSWORD=admin_password
+    ports:
+      - "8082:80"
+    volumes:
+      - nextcloud_data:/var/www/html
+    networks:
+      - clinica_network
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - clinica_network
+    restart: unless-stopped
+
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - "3100:3100"
+    volumes:
+      - loki_data:/loki
+    networks:
+      - clinica_network
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    depends_on:
+      - loki
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+    ports:
+      - "3003:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - clinica_network
+    restart: unless-stopped
+
+  integration-service:
+    build:
+      context: ./integration-service
+      dockerfile: Dockerfile
+    depends_on:
+      - odoo
+      - keycloak
+      - nextcloud
+      - rabbitmq
+      - loki
+    ports:
+      - "3001:3001"
+    environment:
+      - ODOO_URL=http://odoo:8069
+      - NEXTCLOUD_URL=http://nextcloud:80
+      - KEYCLOAK_URL=http://keycloak:8080
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+      - LOKI_URL=http://loki:3100
+    networks:
+      - clinica_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  odoo_data:
+  nextcloud_data:
+  loki_data:
+  grafana_data:
+  keycloak_data:
+
+networks:
+  clinica_network:
+    driver: bridge

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_zammad_config,zammad.config,model_zammad_config,base.group_system,1,1,1,1
+access_zammad_config_user,zammad.config.user,model_zammad_config,base.group_user,1,0,0,0
+access_zammad_ticket,zammad.ticket,model_zammad_ticket,base.group_user,1,1,1,1
+access_zammad_ticket_manager,zammad.ticket.manager,model_zammad_ticket,base.group_system,1,1,1,1

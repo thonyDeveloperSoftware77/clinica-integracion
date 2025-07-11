@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sample Patients -->
+        <record id="sample_patient_1" model="res.partner">
+            <field name="name">John Smith</field>
+            <field name="is_patient" eval="True"/>
+            <field name="patient_no">PAT001</field>
+            <field name="email">john.smith@example.com</field>
+            <field name="mobile">+1234567890</field>
+            <field name="gender">male</field>
+            <field name="patient_age">35</field>
+        </record>
+
+        <record id="sample_patient_2" model="res.partner">
+            <field name="name">Jane Doe</field>
+            <field name="is_patient" eval="True"/>
+            <field name="patient_no">PAT002</field>
+            <field name="email">jane.doe@example.com</field>
+            <field name="mobile">+1234567891</field>
+            <field name="gender">female</field>
+            <field name="patient_age">28</field>
+        </record>
+
+        <!-- Sample Dentists -->
+        <record id="sample_dentist_1" model="hr.employee">
+            <field name="name">Dr. Sarah Johnson</field>
+            <field name="is_dentist" eval="True"/>
+            <field name="work_email">sarah.johnson@clinic.com</field>
+            <field name="work_phone">+1234567892</field>
+        </record>
+
+        <record id="sample_dentist_2" model="hr.employee">
+            <field name="name">Dr. Michael Brown</field>
+            <field name="is_dentist" eval="True"/>
+            <field name="work_email">michael.brown@clinic.com</field>
+            <field name="work_phone">+1234567893</field>
+        </record>
+
+        <!-- Sample Appointments -->
+        <record id="sample_appointment_1" model="dental.appointment">
+            <field name="appointment_no">APT001</field>
+            <field name="patient_id" ref="sample_patient_1"/>
+            <field name="dentist_id" ref="sample_dentist_1"/>
+            <field name="appointment_date" eval="(DateTime.now() - timedelta(days=1)).strftime('%Y-%m-%d')"/>
+            <field name="state">done</field>
+            <field name="urgency">normal</field>
+            <field name="patient_categ">old</field>
+            <field name="gender">male</field>
+            <field name="age">35</field>
+            <field name="mobile">+1234567890</field>
+            <field name="patient_no">PAT001</field>
+        </record>
+
+        <record id="sample_appointment_2" model="dental.appointment">
+            <field name="appointment_no">APT002</field>
+            <field name="patient_id" ref="sample_patient_2"/>
+            <field name="dentist_id" ref="sample_dentist_2"/>
+            <field name="appointment_date" eval="DateTime.now().strftime('%Y-%m-%d')"/>
+            <field name="state">confirmed</field>
+            <field name="urgency">urgent</field>
+            <field name="patient_categ">new</field>
+            <field name="gender">female</field>
+            <field name="age">28</field>
+            <field name="mobile">+1234567891</field>
+            <field name="patient_no">PAT002</field>
+        </record>
+
+        <record id="sample_appointment_3" model="dental.appointment">
+            <field name="appointment_no">APT003</field>
+            <field name="patient_id" ref="sample_patient_1"/>
+            <field name="dentist_id" ref="sample_dentist_1"/>
+            <field name="appointment_date" eval="(DateTime.now() + timedelta(days=7)).strftime('%Y-%m-%d')"/>
+            <field name="state">confirmed</field>
+            <field name="urgency">normal</field>
+            <field name="patient_categ">old</field>
+            <field name="gender">male</field>
+            <field name="age">35</field>
+            <field name="mobile">+1234567890</field>
+            <field name="patient_no">PAT001</field>
+        </record>
+
+        <record id="sample_appointment_4" model="dental.appointment">
+            <field name="appointment_no">APT004</field>
+            <field name="patient_id" ref="sample_patient_2"/>
+            <field name="dentist_id" ref="sample_dentist_2"/>
+            <field name="appointment_date" eval="(DateTime.now() + timedelta(days=3)).strftime('%Y-%m-%d')"/>
+            <field name="state">draft</field>
+            <field name="urgency">normal</field>
+            <field name="patient_categ">old</field>
+            <field name="gender">female</field>
+            <field name="age">28</field>
+            <field name="mobile">+1234567891</field>
+            <field name="patient_no">PAT002</field>
+        </record>
+    </data>
+</odoo>
