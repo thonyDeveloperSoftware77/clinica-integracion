@@ -97,6 +97,16 @@ services:
         max-file: "3"
         labels: "service=rabbitmq"
 
+  mailer:
+    build:
+      context: ./mailer-service
+    depends_on:
+      - rabbitmq
+    networks:
+      - clinica_network
+    restart: unless-stopped
+
+
   loki:
     image: grafana/loki:latest
     ports:
