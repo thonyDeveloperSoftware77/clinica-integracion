@@ -14,6 +14,12 @@ services:
       retries: 5
     networks:
       - clinica_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=postgres"
 
   odoo:
     build:
@@ -38,6 +44,12 @@ services:
     networks:
       - clinica_network
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=odoo"
 
   # Base de datos para OpenEMR
   
@@ -60,6 +72,12 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=nextcloud"
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -72,6 +90,12 @@ services:
     networks:
       - clinica_network
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=rabbitmq"
 
   loki:
     image: grafana/loki:latest
@@ -79,6 +103,22 @@ services:
       - "3100:3100"
     volumes:
       - loki_data:/loki
+      - ./loki-config.yml:/etc/loki/loki-config.yml
+    command: -config.file=/etc/loki/loki-config.yml
+    networks:
+      - clinica_network
+    restart: unless-stopped
+
+  promtail:
+    image: grafana/promtail:latest
+    volumes:
+      - /var/log:/var/log:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./promtail-config.yml:/etc/promtail/promtail-config.yml
+    command: -config.file=/etc/promtail/promtail-config.yml
+    depends_on:
+      - loki
     networks:
       - clinica_network
     restart: unless-stopped
@@ -87,12 +127,92 @@ services:
     image: grafana/grafana:latest
     depends_on:
       - loki
+      - prometheus
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_SECURITY_ADMIN_PASSWORD=admin
     ports:
       - "3003:3000"
     volumes:
       - grafana_data:/var/lib/grafana
+      - ./grafana-provisioning:/etc/grafana/provisioning
+    networks:
+      - clinica_network
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus-config.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - clinica_network
+    restart: unless-stopped
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    networks:
+      - clinica_network
+    restart: unless-stopped
+
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    environment:
+      DATA_SOURCE_NAME: "postgresql://clinica_user:clinica_password@postgres:5432/clinica_db?sslmode=disable"
+    ports:
+      - "9187:9187"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - clinica_network
+    restart: unless-stopped
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    ports:
+      - "8081:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    privileged: true
+    networks:
+      - clinica_network
+    restart: unless-stopped
+
+  rabbitmq-exporter:
+    image: kbudde/rabbitmq-exporter:latest
+    environment:
+      RABBIT_URL: "http://rabbitmq:15672"
+      RABBIT_USER: "guest"
+      RABBIT_PASSWORD: "guest"
+    ports:
+      - "9419:9419"
+    depends_on:
+      - rabbitmq
     networks:
       - clinica_network
     restart: unless-stopped
@@ -104,6 +224,7 @@ volumes:
   nextcloud_data:
   loki_data:
   grafana_data:
+  prometheus_data:
 
 networks:
   clinica_network:

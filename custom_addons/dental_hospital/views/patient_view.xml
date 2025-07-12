@@ -62,9 +62,4 @@
         <field name="domain">[('move_type', '=', 'out_invoice')]</field>
     </record>
 
-    <!-- Menú principal -->
-    <menuitem id="hospital_root_menu" name="Clínica Dental" sequence="1"/>
-    <menuitem id="hospital_patient_info" name="Pacientes" parent="hospital_root_menu" action="dental_patient_menu" sequence="3"/>
-    <menuitem id="hospital_invoice_info" name="Facturas" parent="hospital_root_menu" action="action_patient_invoices" sequence="4"/>
-
 </odoo>

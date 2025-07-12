@@ -1,4 +1,0 @@
-FROM openmrs/openmrs-reference-application-distro:2.12.0
-
-
-COPY oauth2.properties /usr/local/tomcat/.OpenMRS/

@@ -29,8 +29,6 @@
         </record>
 
         <!-- MENU STRUCTURE -->
-        <menuitem id="hospital_root_menu" name="Clínica Dental" sequence="1"/>
-        <menuitem id="dental_configure" name="Configurar" parent="hospital_root_menu"  sequence="5"/>
         <menuitem id="dental_purpose" name="Propósito" parent="dental_configure" action="dental_purpose_menu_action" sequence="1"/>
     </data>
 </odoo>

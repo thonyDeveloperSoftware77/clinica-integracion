@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extend Dental Prescription Form View to add NextCloud fields -->
+    <record id="dental_prescription_form_nextcloud" model="ir.ui.view">
+        <field name="name">dental.prescription.form.nextcloud</field>
+        <field name="model">dental.prescription</field>
+        <field name="inherit_id" ref="dental_hospital.dental_prescription_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='medicine_ids']" position="after">
+                <group string="NextCloud Integration" invisible="not id">
+                    <field name="nextcloud_upload_status" readonly="1"/>
+                    <field name="nextcloud_file_path" readonly="1" invisible="not nextcloud_file_path"/>
+                </group>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="action_reupload_to_nextcloud" 
+                        type="object" 
+                        string="Re-upload to NextCloud" 
+                        class="btn-secondary"
+                        invisible="not id"/>
+                <button name="action_view_nextcloud_file" 
+                        type="object" 
+                        string="View in NextCloud" 
+                        class="btn-primary"
+                        invisible="not id or not nextcloud_file_path"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extend Dental Prescription Tree View to show NextCloud status -->
+    <record id="dental_prescription_tree_nextcloud" model="ir.ui.view">
+        <field name="name">dental.prescription.tree.nextcloud</field>
+        <field name="model">dental.prescription</field>
+        <field name="inherit_id" ref="dental_hospital.dental_prescription_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="nextcloud_upload_status"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

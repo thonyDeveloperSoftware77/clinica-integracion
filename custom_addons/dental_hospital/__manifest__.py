@@ -16,7 +16,10 @@
     'depends': ['base', 'hr', 'account', 'sale', 'product', 'web','stock', 'purchase', 'mail', 'portal', 'auth_oidc'],
     'external_dependencies': {'python': ['requests']},
     'data': [
+    'security/dental_security.xml',
     'security/ir.model.access.csv',
+    'security/menu_security.xml',
+    'data/default_groups.xml',
     'data/patient_id_sequence.xml',
     'data/incident_sequence.xml',
     'data/sample_appointments.xml',

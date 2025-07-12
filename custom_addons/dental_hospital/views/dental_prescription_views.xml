@@ -140,8 +140,4 @@
         <field name="view_mode">list,form</field>
         <field name="context">{'search_default_today': True}</field>
     </record>
-    <!-- MENU STRUCTURE -->
-    <menuitem id="hospital_root_menu" name="Clínica Dental" sequence="1"/>
-    <menuitem id="dental_prescription_menu" name="Recetas" parent="hospital_root_menu"
-              action="dental_prescription_menu_action" sequence="2"/>
 </odoo>

@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
+                <field name="priority" widget="badge" decoration-danger="priority == 'critico'" decoration-warning="priority == 'alto'" decoration-success="priority == 'normal'"/>
                 <field name="user_name"/>
                 <field name="user_email"/>
                 <field name="description"/>
@@ -52,6 +53,7 @@
                             <field name="create_date" readonly="1"/>
                         </group>
                         <group>
+                            <field name="priority" widget="radio"/>
                             <field name="zammad_ticket_number" readonly="1"/>
                             <field name="zammad_ticket_id" readonly="1"/>
                             <field name="last_sync" readonly="1"/>
@@ -115,7 +117,11 @@
         <field name="search_view_id" ref="incident_report_search_view"/>
     </record>
 
-    <!-- Menu -->
-    <menuitem id="incident_report_menu" name="Incident Reports" action="incident_report_action" sequence="50"/>
+    <!-- Menu for Incident Reports - accessible to all dental users -->
+    <menuitem id="incident_report_menu" 
+              name="Reportes de Incidentes" 
+              action="incident_report_action" 
+              sequence="1"
+              groups="dental_hospital.group_dental_user"/>
 
 </odoo>

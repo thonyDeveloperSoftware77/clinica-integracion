@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Categories -->
+        <record id="module_category_dental_hospital" model="ir.module.category">
+            <field name="name">Dental Hospital</field>
+            <field name="description">Access rights for Dental Hospital Management</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- Groups -->
+        <record id="group_dental_user" model="res.groups">
+            <field name="name">Dental Hospital: User</field>
+            <field name="category_id" ref="module_category_dental_hospital"/>
+            <field name="comment">Basic user can only access incident reports</field>
+        </record>
+
+        <record id="group_dental_manager" model="res.groups">
+            <field name="name">Dental Hospital: Manager</field>
+            <field name="category_id" ref="module_category_dental_hospital"/>
+            <field name="implied_ids" eval="[(4, ref('group_dental_user'))]"/>
+            <field name="comment">Manager has full access to all dental hospital features</field>
+        </record>
+
+        <record id="group_dental_admin" model="res.groups">
+            <field name="name">Dental Hospital: Administrator</field>
+            <field name="category_id" ref="module_category_dental_hospital"/>
+            <field name="implied_ids" eval="[(4, ref('group_dental_manager'))]"/>
+            <field name="comment">Administrator has full system access</field>
+        </record>
+    </data>
+</odoo>

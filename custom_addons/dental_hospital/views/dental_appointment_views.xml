@@ -180,13 +180,5 @@
             <!--            />-->
         </record>
 
-        <!-- MENU STRUCTURE -->
-        <menuitem id="dentist_menu_root"
-                  web_icon="dental_hospital,static/src/img/icon.png"
-                  name="Clínica Dental"/>
-        <menuitem id="hospital_root_menu" name="Clínica Dental" sequence="1"
-                  web_icon="dental_hospital,static/src/img/icon.png"/>
-        <menuitem id="hospital_appointment_info" name="Citas" parent="hospital_root_menu"
-                  action="dental_appointment_menu_action" sequence="2"/>
     </data>
 </odoo>

@@ -1,0 +1,860 @@
+openapi: 3.0.3
+info:
+  title: Dental Hospital API
+  description: |
+    API REST para la gestión integral de una clínica dental.
+    
+    Esta API proporciona endpoints para:
+    - Gestión de reportes de incidentes
+    - Administración de pacientes
+    - Programación de citas
+    - Manejo de prescripciones médicas
+    
+    ## Autenticación
+    
+    La API requiere autenticación de usuario de Odoo. Las credenciales deben enviarse mediante:
+    - Cookie de sesión de Odoo
+    - O autenticación básica HTTP
+    
+    ## Códigos de respuesta
+    
+    - `200` - Éxito
+    - `400` - Error en la solicitud
+    - `401` - No autorizado
+    - `403` - Acceso denegado
+    - `404` - Recurso no encontrado
+    - `500` - Error interno del servidor
+    
+  version: 1.0.0
+  contact:
+    name: Soporte Técnico
+    email: support@dentalhospital.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:8069
+    description: Servidor de desarrollo
+  - url: https://clinic.example.com
+    description: Servidor de producción
+
+paths:
+  /api/v1/info:
+    get:
+      tags:
+        - System
+      summary: Información de la API
+      description: Obtiene información general sobre la API y sus endpoints disponibles
+      operationId: getApiInfo
+      responses:
+        '200':
+          description: Información de la API obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiInfoResponse'
+
+  /api/v1/incidents:
+    get:
+      tags:
+        - Incidents
+      summary: Listar reportes de incidentes
+      description: Obtiene una lista paginada de reportes de incidentes
+      operationId: getIncidents
+      security:
+        - odooAuth: []
+      parameters:
+        - name: limit
+          in: query
+          description: Número máximo de resultados
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 100
+        - name: offset
+          in: query
+          description: Número de resultados a omitir
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - name: patient_id
+          in: query
+          description: Filtrar por ID de paciente
+          schema:
+            type: integer
+        - name: state
+          in: query
+          description: Filtrar por estado
+          schema:
+            type: string
+            enum: [draft, submitted, in_progress, resolved, closed]
+      responses:
+        '200':
+          description: Lista de incidentes obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentsListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    
+    post:
+      tags:
+        - Incidents
+      summary: Crear nuevo reporte de incidente
+      description: Crea un nuevo reporte de incidente en el sistema
+      operationId: createIncident
+      security:
+        - odooAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIncidentRequest'
+      responses:
+        '200':
+          description: Incidente creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/incidents/{incident_id}:
+    get:
+      tags:
+        - Incidents
+      summary: Obtener detalles de incidente
+      description: Obtiene los detalles completos de un incidente específico
+      operationId: getIncident
+      security:
+        - odooAuth: []
+      parameters:
+        - name: incident_id
+          in: path
+          required: true
+          description: ID del incidente
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles del incidente obtenidos exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentDetailResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    
+    put:
+      tags:
+        - Incidents
+      summary: Actualizar incidente
+      description: Actualiza los datos de un incidente existente
+      operationId: updateIncident
+      security:
+        - odooAuth: []
+      parameters:
+        - name: incident_id
+          in: path
+          required: true
+          description: ID del incidente
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIncidentRequest'
+      responses:
+        '200':
+          description: Incidente actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/patients:
+    get:
+      tags:
+        - Patients
+      summary: Listar pacientes
+      description: Obtiene una lista paginada de pacientes
+      operationId: getPatients
+      security:
+        - odooAuth: []
+      parameters:
+        - name: limit
+          in: query
+          description: Número máximo de resultados
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 100
+        - name: offset
+          in: query
+          description: Número de resultados a omitir
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - name: search
+          in: query
+          description: Buscar por nombre
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de pacientes obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientsListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/patients/{patient_id}:
+    get:
+      tags:
+        - Patients
+      summary: Obtener detalles de paciente
+      description: Obtiene los detalles completos de un paciente específico
+      operationId: getPatient
+      security:
+        - odooAuth: []
+      parameters:
+        - name: patient_id
+          in: path
+          required: true
+          description: ID del paciente
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles del paciente obtenidos exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientDetailResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/appointments:
+    get:
+      tags:
+        - Appointments
+      summary: Listar citas
+      description: Obtiene una lista paginada de citas médicas
+      operationId: getAppointments
+      security:
+        - odooAuth: []
+      parameters:
+        - name: limit
+          in: query
+          description: Número máximo de resultados
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 100
+        - name: offset
+          in: query
+          description: Número de resultados a omitir
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - name: patient_id
+          in: query
+          description: Filtrar por ID de paciente
+          schema:
+            type: integer
+        - name: doctor_id
+          in: query
+          description: Filtrar por ID de doctor
+          schema:
+            type: integer
+        - name: date_from
+          in: query
+          description: Fecha desde (YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
+        - name: date_to
+          in: query
+          description: Fecha hasta (YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
+        - name: state
+          in: query
+          description: Filtrar por estado de la cita
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de citas obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentsListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/prescriptions:
+    get:
+      tags:
+        - Prescriptions
+      summary: Listar prescripciones
+      description: Obtiene una lista paginada de prescripciones médicas
+      operationId: getPrescriptions
+      security:
+        - odooAuth: []
+      parameters:
+        - name: limit
+          in: query
+          description: Número máximo de resultados
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 100
+        - name: offset
+          in: query
+          description: Número de resultados a omitir
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - name: patient_id
+          in: query
+          description: Filtrar por ID de paciente
+          schema:
+            type: integer
+        - name: doctor_id
+          in: query
+          description: Filtrar por ID de doctor
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de prescripciones obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrescriptionsListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  securitySchemes:
+    odooAuth:
+      type: http
+      scheme: basic
+      description: Autenticación básica de Odoo
+
+  schemas:
+    # Response Schemas
+    ApiInfoResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          properties:
+            name:
+              type: string
+              example: "Dental Hospital API"
+            version:
+              type: string
+              example: "1.0.0"
+            description:
+              type: string
+              example: "API REST para gestión de clínica dental"
+            documentation:
+              type: string
+              example: "/api/v1/docs"
+            endpoints:
+              type: object
+
+    BaseResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
+        message:
+          type: string
+
+    IncidentsListResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Incident'
+            total:
+              type: integer
+            count:
+              type: integer
+
+    IncidentDetailResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/IncidentDetail'
+
+    IncidentResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/Incident'
+
+    PatientsListResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Patient'
+            total:
+              type: integer
+            count:
+              type: integer
+
+    PatientDetailResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/PatientDetail'
+
+    AppointmentsListResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Appointment'
+            total:
+              type: integer
+            count:
+              type: integer
+
+    PrescriptionsListResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Prescription'
+            total:
+              type: integer
+            count:
+              type: integer
+
+    # Request Schemas
+    CreateIncidentRequest:
+      type: object
+      required:
+        - title
+        - description
+        - incident_type
+        - urgency
+      properties:
+        title:
+          type: string
+          example: "Problema con cita médica"
+          minLength: 5
+          maxLength: 100
+        description:
+          type: string
+          example: "No pude asistir a mi cita programada debido a una emergencia"
+          minLength: 10
+          maxLength: 500
+        incident_type:
+          type: string
+          example: "scheduling"
+          enum: [scheduling, medical, technical, billing, other]
+        urgency:
+          type: string
+          example: "medium"
+          enum: [low, medium, high, urgent]
+        patient_id:
+          type: integer
+          example: 123
+
+    UpdateIncidentRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 5
+          maxLength: 100
+        description:
+          type: string
+          minLength: 10
+          maxLength: 500
+        urgency:
+          type: string
+          enum: [low, medium, high, urgent]
+        state:
+          type: string
+          enum: [draft, submitted, in_progress, resolved, closed]
+
+    # Entity Schemas
+    Incident:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "Problema con cita médica"
+        description:
+          type: string
+          example: "No pude asistir a mi cita programada"
+        incident_type:
+          type: string
+          example: "scheduling"
+        urgency:
+          type: string
+          example: "medium"
+        state:
+          type: string
+          example: "draft"
+        patient_id:
+          type: integer
+          nullable: true
+          example: 123
+        patient_name:
+          type: string
+          nullable: true
+          example: "Juan Pérez"
+        user_email:
+          type: string
+          example: "juan@example.com"
+        user_name:
+          type: string
+          example: "Juan Pérez"
+        create_date:
+          type: string
+          format: date-time
+          example: "2025-01-11T10:30:00Z"
+        write_date:
+          type: string
+          format: date-time
+          example: "2025-01-11T11:45:00Z"
+        zammad_ticket_id:
+          type: integer
+          nullable: true
+          example: 456
+
+    IncidentDetail:
+      allOf:
+        - $ref: '#/components/schemas/Incident'
+
+    Patient:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 123
+        name:
+          type: string
+          example: "Juan Pérez"
+        email:
+          type: string
+          format: email
+          example: "juan@example.com"
+        phone:
+          type: string
+          nullable: true
+          example: "+1234567890"
+        mobile:
+          type: string
+          nullable: true
+          example: "+0987654321"
+        street:
+          type: string
+          nullable: true
+          example: "Calle Principal 123"
+        city:
+          type: string
+          nullable: true
+          example: "Ciudad"
+        country_id:
+          type: integer
+          nullable: true
+          example: 1
+        country_name:
+          type: string
+          nullable: true
+          example: "Colombia"
+        is_patient:
+          type: boolean
+          example: true
+        create_date:
+          type: string
+          format: date-time
+          example: "2025-01-01T00:00:00Z"
+
+    PatientDetail:
+      allOf:
+        - $ref: '#/components/schemas/Patient'
+        - type: object
+          properties:
+            state_id:
+              type: integer
+              nullable: true
+              example: 1
+            state_name:
+              type: string
+              nullable: true
+              example: "Antioquia"
+            zip:
+              type: string
+              nullable: true
+              example: "050001"
+            write_date:
+              type: string
+              format: date-time
+              example: "2025-01-11T12:00:00Z"
+
+    Appointment:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 456
+        patient_id:
+          type: integer
+          nullable: true
+          example: 123
+        patient_name:
+          type: string
+          nullable: true
+          example: "Juan Pérez"
+        doctor_id:
+          type: integer
+          nullable: true
+          example: 789
+        doctor_name:
+          type: string
+          nullable: true
+          example: "Dr. Ana García"
+        appointment_date:
+          type: string
+          format: date-time
+          nullable: true
+          example: "2025-01-15T14:30:00Z"
+        appointment_time:
+          type: string
+          nullable: true
+          example: "14:30"
+        state:
+          type: string
+          nullable: true
+          example: "scheduled"
+        notes:
+          type: string
+          nullable: true
+          example: "Revisión general"
+        create_date:
+          type: string
+          format: date-time
+          example: "2025-01-11T10:00:00Z"
+
+    Prescription:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 789
+        sequence_no:
+          type: string
+          example: "PRESC/2025/001"
+        patient_id:
+          type: integer
+          nullable: true
+          example: 123
+        patient_name:
+          type: string
+          nullable: true
+          example: "Juan Pérez"
+        doctor_id:
+          type: integer
+          nullable: true
+          example: 456
+        doctor_name:
+          type: string
+          nullable: true
+          example: "Dr. Ana García"
+        prescription_date:
+          type: string
+          format: date-time
+          nullable: true
+          example: "2025-01-11T15:00:00Z"
+        state:
+          type: string
+          nullable: true
+          example: "active"
+        notes:
+          type: string
+          nullable: true
+          example: "Tomar con las comidas"
+        create_date:
+          type: string
+          format: date-time
+          example: "2025-01-11T15:00:00Z"
+
+  responses:
+    BadRequest:
+      description: Solicitud incorrecta
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/BaseResponse'
+              - type: object
+                properties:
+                  success:
+                    example: false
+                  error:
+                    example: "Datos incompletos"
+                  message:
+                    example: "Faltan campos requeridos"
+
+    Unauthorized:
+      description: No autorizado
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/BaseResponse'
+              - type: object
+                properties:
+                  success:
+                    example: false
+                  error:
+                    example: "No autorizado"
+                  message:
+                    example: "Credenciales inválidas"
+
+    Forbidden:
+      description: Acceso denegado
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/BaseResponse'
+              - type: object
+                properties:
+                  success:
+                    example: false
+                  error:
+                    example: "Acceso denegado"
+                  message:
+                    example: "No tiene permisos para realizar esta acción"
+
+    NotFound:
+      description: Recurso no encontrado
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/BaseResponse'
+              - type: object
+                properties:
+                  success:
+                    example: false
+                  error:
+                    example: "Recurso no encontrado"
+                  message:
+                    example: "El recurso solicitado no existe"
+
+    InternalServerError:
+      description: Error interno del servidor
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/BaseResponse'
+              - type: object
+                properties:
+                  success:
+                    example: false
+                  error:
+                    example: "Error interno"
+                  message:
+                    example: "Ocurrió un error inesperado"
+
+tags:
+  - name: System
+    description: Información del sistema y API
+  - name: Incidents
+    description: Gestión de reportes de incidentes
+  - name: Patients
+    description: Administración de pacientes
+  - name: Appointments
+    description: Programación de citas médicas
+  - name: Prescriptions
+    description: Manejo de prescripciones médicas

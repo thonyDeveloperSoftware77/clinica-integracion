@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Main Menu Structure with Security -->
+        
+        <!-- Root menu - visible to all dental users -->
+        <record id="hospital_root_menu" model="ir.ui.menu">
+            <field name="name">Clínica Dental</field>
+            <field name="sequence">1</field>
+            <field name="web_icon">dental_hospital,static/src/img/icon.png</field>
+            <field name="groups_id" eval="[(4, ref('group_dental_user'))]"/>
+        </record>
+
+        <!-- Incident Reports - visible to users, managers and admins -->
+        <record id="incident_report_menu_main" model="ir.ui.menu">
+            <field name="name">Reportes de Incidentes</field>
+            <field name="parent_id" ref="hospital_root_menu"/>
+            <field name="action" ref="incident_report_action"/>
+            <field name="sequence">1</field>
+            <field name="groups_id" eval="[(4, ref('group_dental_user')), (4, ref('group_dental_manager')), (4, ref('group_dental_admin'))]"/>
+        </record>
+
+        <!-- Configuration - only for admins -->
+        <record id="dental_configure" model="ir.ui.menu">
+            <field name="name">Configuración</field>
+            <field name="parent_id" ref="hospital_root_menu"/>
+            <field name="sequence">100</field>
+            <field name="groups_id" eval="[(4, ref('group_dental_admin'))]"/>
+        </record>
+
+        <!-- Patients - only for managers and admins -->
+        <record id="hospital_patient_info" model="ir.ui.menu">
+            <field name="name">Pacientes</field>
+            <field name="parent_id" ref="hospital_root_menu"/>
+            <field name="action" ref="dental_patient_menu"/>
+            <field name="sequence">2</field>
+            <field name="groups_id" eval="[(4, ref('group_dental_manager'))]"/>
+        </record>
+
+        <!-- Appointments - only for managers and admins -->
+        <record id="hospital_appointment_info" model="ir.ui.menu">
+            <field name="name">Citas</field>
+            <field name="parent_id" ref="hospital_root_menu"/>
+            <field name="action" ref="dental_appointment_menu_action"/>
+            <field name="sequence">3</field>
+            <field name="groups_id" eval="[(4, ref('group_dental_manager'))]"/>
+        </record>
+
+        <!-- Prescriptions - only for managers and admins -->
+        <record id="dental_prescription_menu" model="ir.ui.menu">
+            <field name="name">Recetas</field>
+            <field name="parent_id" ref="hospital_root_menu"/>
+            <field name="action" ref="dental_prescription_menu_action"/>
+            <field name="sequence">4</field>
+            <field name="groups_id" eval="[(4, ref('group_dental_manager'))]"/>
+        </record>
+
+        <!-- Staff - only for managers and admins -->
+        <record id="dental_staff" model="ir.ui.menu">
+            <field name="name">Personal</field>
+            <field name="parent_id" ref="hospital_root_menu"/>
+            <field name="sequence">5</field>
+            <field name="groups_id" eval="[(4, ref('group_dental_manager'))]"/>
+        </record>
+
+        <!-- Invoices - only for managers and admins -->
+        <record id="hospital_invoice_info" model="ir.ui.menu">
+            <field name="name">Facturas</field>
+            <field name="parent_id" ref="hospital_root_menu"/>
+            <field name="action" ref="action_patient_invoices"/>
+            <field name="sequence">6</field>
+            <field name="groups_id" eval="[(4, ref('group_dental_manager'))]"/>
+        </record>
+
+    </data>
+</odoo>

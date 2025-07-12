@@ -17,6 +17,11 @@ class IncidentReport(models.Model):
 
     name = fields.Char(string='Reference', default='New', readonly=True)
     description = fields.Text(string='Incident Description', required=True)
+    priority = fields.Selection([
+        ('normal', 'Normal'),
+        ('alto', 'Alto'),
+        ('critico', 'Crítico')
+    ], string='Priority', default='normal', required=True)
     user_name = fields.Char(string='Reported by', readonly=True)
     user_email = fields.Char(string='Email', readonly=True)
     zammad_ticket_number = fields.Char(string='Zammad Ticket', readonly=True)

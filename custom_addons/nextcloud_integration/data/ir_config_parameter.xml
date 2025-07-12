@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- NextCloud Configuration Parameters -->
+        <record id="nextcloud_url" model="ir.config_parameter">
+            <field name="key">nextcloud.url</field>
+            <field name="value">http://nextcloud</field>
+        </record>
+        
+        <record id="nextcloud_port" model="ir.config_parameter">
+            <field name="key">nextcloud.port</field>
+            <field name="value">80</field>
+        </record>
+        
+        <record id="nextcloud_username" model="ir.config_parameter">
+            <field name="key">nextcloud.username</field>
+            <field name="value">admin</field>
+        </record>
+        
+        <record id="nextcloud_password" model="ir.config_parameter">
+            <field name="key">nextcloud.password</field>
+            <field name="value">admin_password75</field>
+        </record>
+        
+        <record id="nextcloud_base_folder" model="ir.config_parameter">
+            <field name="key">nextcloud.base_folder</field>
+            <field name="value">Prescriptions</field>
+        </record>
+    </data>
+</odoo>

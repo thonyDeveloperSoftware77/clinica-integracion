@@ -1,0 +1,630 @@
+{
+  "info": {
+    "name": "Dental Hospital API",
+    "description": "Colección de APIs para la gestión de clínica dental",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "dental-hospital-api-v1",
+    "version": "1.0.0"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{username}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{password}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8069",
+      "type": "string"
+    },
+    {
+      "key": "username",
+      "value": "admin",
+      "type": "string"
+    },
+    {
+      "key": "password",
+      "value": "admin",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Get API Info",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/info",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "info"]
+            },
+            "description": "Obtiene información general de la API"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Incidents",
+      "item": [
+        {
+          "name": "List Incidents",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/incidents?limit=10&offset=0",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "incidents"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Número máximo de resultados"
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Número de resultados a omitir"
+                },
+                {
+                  "key": "patient_id",
+                  "value": "",
+                  "description": "Filtrar por ID de paciente",
+                  "disabled": true
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "description": "Filtrar por estado (draft, submitted, in_progress, resolved, closed)",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Lista todos los reportes de incidentes con paginación"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Incident",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Problema con cita médica\",\n  \"description\": \"No pude asistir a mi cita programada debido a una emergencia familiar\",\n  \"incident_type\": \"scheduling\",\n  \"urgency\": \"medium\",\n  \"patient_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/incidents",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "incidents"]
+            },
+            "description": "Crea un nuevo reporte de incidente"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Incident Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/incidents/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "incidents", "1"]
+            },
+            "description": "Obtiene los detalles de un incidente específico"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Incident",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"in_progress\",\n  \"urgency\": \"high\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/incidents/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "incidents", "1"]
+            },
+            "description": "Actualiza un incidente existente"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Patients",
+      "item": [
+        {
+          "name": "List Patients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/patients?limit=10&offset=0",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "patients"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Número máximo de resultados"
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Número de resultados a omitir"
+                },
+                {
+                  "key": "search",
+                  "value": "",
+                  "description": "Buscar por nombre",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Lista todos los pacientes con paginación"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Patient Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/patients/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "patients", "1"]
+            },
+            "description": "Obtiene los detalles completos de un paciente específico"
+          },
+          "response": []
+        },
+        {
+          "name": "Search Patients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/patients?search=Juan&limit=5",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "patients"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "Juan",
+                  "description": "Buscar pacientes por nombre"
+                },
+                {
+                  "key": "limit",
+                  "value": "5",
+                  "description": "Limitar resultados"
+                }
+              ]
+            },
+            "description": "Busca pacientes por nombre"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Appointments",
+      "item": [
+        {
+          "name": "List Appointments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/appointments?limit=10&offset=0",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "appointments"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Número máximo de resultados"
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Número de resultados a omitir"
+                },
+                {
+                  "key": "patient_id",
+                  "value": "",
+                  "description": "Filtrar por ID de paciente",
+                  "disabled": true
+                },
+                {
+                  "key": "doctor_id",
+                  "value": "",
+                  "description": "Filtrar por ID de doctor",
+                  "disabled": true
+                },
+                {
+                  "key": "date_from",
+                  "value": "",
+                  "description": "Fecha desde (YYYY-MM-DD)",
+                  "disabled": true
+                },
+                {
+                  "key": "date_to",
+                  "value": "",
+                  "description": "Fecha hasta (YYYY-MM-DD)",
+                  "disabled": true
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "description": "Filtrar por estado",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Lista todas las citas médicas con filtros"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter Appointments by Date",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/appointments?date_from=2025-01-15&date_to=2025-01-31",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "appointments"],
+              "query": [
+                {
+                  "key": "date_from",
+                  "value": "2025-01-15",
+                  "description": "Fecha desde"
+                },
+                {
+                  "key": "date_to",
+                  "value": "2025-01-31",
+                  "description": "Fecha hasta"
+                }
+              ]
+            },
+            "description": "Lista citas filtradas por rango de fechas"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Patient Appointments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/appointments?patient_id=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "appointments"],
+              "query": [
+                {
+                  "key": "patient_id",
+                  "value": "1",
+                  "description": "ID del paciente"
+                }
+              ]
+            },
+            "description": "Lista todas las citas de un paciente específico"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Prescriptions",
+      "item": [
+        {
+          "name": "List Prescriptions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/prescriptions?limit=10&offset=0",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "prescriptions"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Número máximo de resultados"
+                },
+                {
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Número de resultados a omitir"
+                },
+                {
+                  "key": "patient_id",
+                  "value": "",
+                  "description": "Filtrar por ID de paciente",
+                  "disabled": true
+                },
+                {
+                  "key": "doctor_id",
+                  "value": "",
+                  "description": "Filtrar por ID de doctor",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Lista todas las prescripciones médicas"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Patient Prescriptions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/prescriptions?patient_id=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "prescriptions"],
+              "query": [
+                {
+                  "key": "patient_id",
+                  "value": "1",
+                  "description": "ID del paciente"
+                }
+              ]
+            },
+            "description": "Lista todas las prescripciones de un paciente específico"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Doctor Prescriptions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/prescriptions?doctor_id=1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "prescriptions"],
+              "query": [
+                {
+                  "key": "doctor_id",
+                  "value": "1",
+                  "description": "ID del doctor"
+                }
+              ]
+            },
+            "description": "Lista todas las prescripciones de un doctor específico"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Documentation",
+      "item": [
+        {
+          "name": "Swagger UI Documentation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/docs",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "docs"]
+            },
+            "description": "Accede a la documentación interactiva de Swagger UI"
+          },
+          "response": []
+        },
+        {
+          "name": "OpenAPI Specification (YAML)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/openapi.yaml",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "openapi.yaml"]
+            },
+            "description": "Obtiene la especificación OpenAPI en formato YAML"
+          },
+          "response": []
+        },
+        {
+          "name": "OpenAPI Specification (JSON)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/openapi.json",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "openapi.json"]
+            },
+            "description": "Obtiene la especificación OpenAPI en formato JSON"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Error Testing",
+      "item": [
+        {
+          "name": "Test Unauthorized Access",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/incidents",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "incidents"]
+            },
+            "description": "Prueba acceso sin autenticación (debe devolver 401)"
+          },
+          "auth": {
+            "type": "noauth"
+          },
+          "response": []
+        },
+        {
+          "name": "Test Invalid Endpoint",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/nonexistent",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "nonexistent"]
+            },
+            "description": "Prueba endpoint inexistente (debe devolver 404)"
+          },
+          "response": []
+        },
+        {
+          "name": "Test Invalid Incident Creation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Solo título\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/incidents",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "incidents"]
+            },
+            "description": "Prueba crear incidente con datos incompletos (debe devolver 400)"
+          },
+          "response": []
+        },
+        {
+          "name": "Test Resource Not Found",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/incidents/99999",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "incidents", "99999"]
+            },
+            "description": "Prueba acceso a recurso inexistente (debe devolver 404)"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

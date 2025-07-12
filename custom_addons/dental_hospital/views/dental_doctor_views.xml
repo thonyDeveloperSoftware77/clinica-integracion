@@ -162,7 +162,6 @@
                                       (0, 0, {'view_mode': 'list', 'view_id': ref('view_dental_doctor_tree')}),
                                       (0, 0, {'view_mode': 'form', 'view_id': ref('view_dental_doctor_form')})]"/>
     </record>
-    <menuitem id="hospital_root_menu" name="Dental Clinic" sequence="1"/>
-    <menuitem id="dental_staff" name="Staffs" parent="hospital_root_menu" sequence="3"
+    <menuitem id="dental_doctor_menu" name="Doctores" parent="dental_staff" sequence="1"
               action="dental_doctor_menu_action"/>
 </odoo>
